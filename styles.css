@@ -61,7 +61,7 @@ body {
   font-size: 16px;
 }
 
-.num-btn {
+.digit-btn {
   background-color: gold;
 }
 
@@ -70,7 +70,7 @@ body {
   background-color: var(--special-purple);
 }
 
-.num-btn,
+.digit-btn,
 .operator-btn,
 .equal-btn {
   color: var(--navy-blue);

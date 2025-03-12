@@ -23,6 +23,7 @@ function operate(num1, operator, num2) {
 
 const digitButtons = document.querySelectorAll(".digit-btn");
 const displayNum = document.querySelector("#display-num");
+const clearBtn = document.querySelectorAll(".clear-btn")[0];
 
 digitButtons.forEach((digitBtn) => {
   digitBtn.addEventListener("click", () => {
@@ -35,4 +36,8 @@ digitButtons.forEach((digitBtn) => {
       displayNum.textContent += digitBtn.textContent;
     }
   });
+});
+
+clearBtn.addEventListener("click", () => {
+  displayNum.textContent = "0";
 });

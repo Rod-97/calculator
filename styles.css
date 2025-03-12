@@ -1,0 +1,91 @@
+:root {
+  --special-purple: rgb(40, 28, 60);
+  --navy-blue: rgb(0, 102, 204);
+  --btn-gap: 5px;
+}
+
+body {
+  background-color: var(--special-purple);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#container {
+  display: inline-block;
+  padding: 20px;
+  background-color: var(--navy-blue);
+  border: 2px solid gold;
+  border-radius: 10px;
+}
+
+#display,
+#btn-container {
+  width: 250px;
+}
+
+#display {
+  background-color: var(--special-purple);
+  color: gold;
+  height: 50px;
+  font-size: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+#display p {
+  margin-left: 10px;
+}
+
+#btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--btn-gap);
+}
+
+.btn {
+  width: calc(25% - var(--btn-gap));
+  aspect-ratio: 1;
+  cursor: pointer;
+
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.num-btn {
+  background-color: gold;
+}
+
+.operator-btn,
+.equal-btn {
+  background-color: var(--special-purple);
+}
+
+.num-btn,
+.operator-btn,
+.equal-btn {
+  color: var(--navy-blue);
+
+  &:hover {
+    background-color: white;
+  }
+}
+
+.clear-btn {
+  background-color: red;
+  color: white;
+
+  &:hover {
+    background-color: white;
+    color: red;
+  }
+}

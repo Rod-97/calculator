@@ -68,7 +68,11 @@ operatorButtons.forEach((operatorBtn) => {
 });
 
 equalBtn.addEventListener("click", () => {
+  if (operator === null && num2 === 0) return;
   num2 = Number(displayNum.textContent);
   const result = operate(num1, operator, num2);
   displayNum.textContent = result;
+  num1 = num2;
+  operator = null;
+  num2 = 0;
 });

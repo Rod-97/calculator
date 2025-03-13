@@ -66,6 +66,7 @@ clearBtn.addEventListener("click", () => {
 operatorButtons.forEach((operatorBtn) => {
   operatorBtn.addEventListener("click", () => {
     if (operator !== null) {
+      if (num2 === 0) return;
       num2 = Number(displayNum.textContent);
       const result = operate(num1, operator, num2);
       num1 = Number(result);

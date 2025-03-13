@@ -29,16 +29,29 @@ const clearBtn = document.querySelectorAll(".clear-btn")[0];
 const operatorButtons = document.querySelectorAll(".operator-btn");
 const equalBtn = document.querySelectorAll(".equal-btn")[0];
 
+const divideByZeroMsg = "Get better sleep.";
+
 let num1 = 0;
 let operator = null;
 let num2 = 0;
 
+function reset() {
+  displayNum.textContent = "0";
+  num1 = 0;
+  operator = null;
+  num2 = 0;
+}
+
 digitButtons.forEach((digitBtn) => {
   digitBtn.addEventListener("click", () => {
-    const oldNum = Number(displayNum.textContent);
     const newDigit = digitBtn.textContent;
 
-    if (oldNum === 0 || (operator !== null && oldNum === num1)) {
+    if (displayNum.textContent === divideByZeroMsg) reset();
+
+    if (
+      displayNum.textContent === "0" ||
+      (operator !== null && Number(displayNum.textContent) === num1)
+    ) {
       displayNum.textContent = newDigit;
     } else {
       displayNum.textContent += digitBtn.textContent;
@@ -47,10 +60,7 @@ digitButtons.forEach((digitBtn) => {
 });
 
 clearBtn.addEventListener("click", () => {
-  displayNum.textContent = "0";
-  num1 = 0;
-  operator = null;
-  num2 = 0;
+  reset();
 });
 
 operatorButtons.forEach((operatorBtn) => {
@@ -70,6 +80,10 @@ operatorButtons.forEach((operatorBtn) => {
 equalBtn.addEventListener("click", () => {
   if (operator === null && num2 === 0) return;
   num2 = Number(displayNum.textContent);
+  if (num2 === 0) {
+    displayNum.textContent = divideByZeroMsg;
+    return;
+  }
   const result = operate(num1, operator, num2);
   displayNum.textContent = result;
   num1 = num2;

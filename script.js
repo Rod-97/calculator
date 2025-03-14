@@ -71,6 +71,7 @@ operatorBtns.forEach((operatorBtn) => {
 });
 
 equalBtn.addEventListener("click", () => {
+  if (num1 === "0" || operator === null) return;
   num2 = display.textContent;
   result = operate(num1, operator, num2);
   clearDisplay();

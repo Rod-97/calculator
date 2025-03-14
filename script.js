@@ -14,12 +14,6 @@ function divide(a, b) {
   return a / b;
 }
 
-let num1 = "0";
-let operator = null;
-let num2 = "0";
-
-let result = "0";
-
 function operate(num1, operator, num2) {
   num1 = Number(num1);
   num2 = Number(num2);
@@ -28,6 +22,12 @@ function operate(num1, operator, num2) {
   if (operator === "x") return multiply(num1, num2);
   if (operator === "/") return divide(num1, num2);
 }
+
+let num1 = "0";
+let operator = null;
+let num2 = "0";
+
+let result = "0";
 
 function reset() {
   num1 = "0";
@@ -65,6 +65,13 @@ digitBtns.forEach((digitBtn) => {
 
 operatorBtns.forEach((operatorBtn) => {
   operatorBtn.addEventListener("click", () => {
+    if (operator !== null) {
+      num2 = display.textContent;
+      result = operate(num1, operator, num2);
+      clearDisplay();
+      populateDisplay(result);
+      num2 = "0";
+    }
     num1 = display.textContent;
     operator = operatorBtn.textContent;
   });
@@ -77,6 +84,7 @@ equalBtn.addEventListener("click", () => {
   clearDisplay();
   populateDisplay(result);
   num1 = String(result);
+  operator = null;
   num2 = "0";
 });
 

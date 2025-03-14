@@ -42,9 +42,14 @@ const operatorBtns = document.querySelectorAll(".operator-btn");
 const equalBtn = document.querySelectorAll(".equal-btn")[0];
 const clearBtn = document.querySelectorAll(".clear-btn")[0];
 
+const divisionByZeroErrorMsg = "Get better sleep.";
+
 function populateDisplay(newNum) {
-  if (display.textContent === "0") display.textContent = newNum;
-  else display.textContent += newNum;
+  if (display.textContent === "0" || newNum === divisionByZeroErrorMsg) {
+    display.textContent = newNum;
+  } else {
+    display.textContent += newNum;
+  }
 }
 
 function clearDisplay() {
@@ -55,7 +60,8 @@ digitBtns.forEach((digitBtn) => {
   digitBtn.addEventListener("click", () => {
     if (
       (operator !== null && display.textContent === num1) ||
-      display.textContent === result
+      display.textContent === result ||
+      display.textContent === divisionByZeroErrorMsg
     ) {
       clearDisplay();
     }
@@ -81,6 +87,11 @@ operatorBtns.forEach((operatorBtn) => {
 equalBtn.addEventListener("click", () => {
   if (num1 === "0" || operator === null) return;
   num2 = display.textContent;
+  if (operator === "/" && num2 === "0") {
+    populateDisplay(divisionByZeroErrorMsg);
+    reset();
+    return;
+  }
   result = operate(num1, operator, num2);
   clearDisplay();
   populateDisplay(result);

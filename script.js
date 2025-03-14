@@ -66,6 +66,7 @@ digitBtns.forEach((digitBtn) => {
 operatorBtns.forEach((operatorBtn) => {
   operatorBtn.addEventListener("click", () => {
     if (operator !== null) {
+      if (num1 === display.textContent) return;
       num2 = display.textContent;
       result = operate(num1, operator, num2);
       clearDisplay();

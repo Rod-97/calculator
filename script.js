@@ -18,6 +18,8 @@ let num1 = "0";
 let operator = null;
 let num2 = "0";
 
+let result = "0";
+
 function operate(num1, operator, num2) {
   num1 = Number(num1);
   num2 = Number(num2);
@@ -27,20 +29,57 @@ function operate(num1, operator, num2) {
   if (operator === "/") return divide(num1, num2);
 }
 
-const display = document.querySelector("#display-num");
-
-function populateDisplay(newDigit) {
-  if (display.textContent === "0") {
-    display.textContent = newDigit;
-  } else {
-    display.textContent += newDigit;
-  }
+function reset() {
+  num1 = "0";
+  operator = null;
+  num2 = "0";
+  result = "0";
 }
 
+const display = document.querySelector("#display-num");
 const digitBtns = document.querySelectorAll(".digit-btn");
+const operatorBtns = document.querySelectorAll(".operator-btn");
+const equalBtn = document.querySelectorAll(".equal-btn")[0];
+const clearBtn = document.querySelectorAll(".clear-btn")[0];
+
+function populateDisplay(newNum) {
+  if (display.textContent === "0") display.textContent = newNum;
+  else display.textContent += newNum;
+}
+
+function clearDisplay() {
+  display.textContent = "0";
+}
 
 digitBtns.forEach((digitBtn) => {
-  digitBtn.addEventListener("click", () =>
-    populateDisplay(digitBtn.textContent)
-  );
+  digitBtn.addEventListener("click", () => {
+    if (
+      (operator !== null && display.textContent === num1) ||
+      display.textContent === result
+    ) {
+      clearDisplay();
+    }
+    populateDisplay(digitBtn.textContent);
+  });
+});
+
+operatorBtns.forEach((operatorBtn) => {
+  operatorBtn.addEventListener("click", () => {
+    num1 = display.textContent;
+    operator = operatorBtn.textContent;
+  });
+});
+
+equalBtn.addEventListener("click", () => {
+  num2 = display.textContent;
+  result = operate(num1, operator, num2);
+  clearDisplay();
+  populateDisplay(result);
+  num1 = String(result);
+  num2 = "0";
+});
+
+clearBtn.addEventListener("click", () => {
+  reset();
+  clearDisplay();
 });

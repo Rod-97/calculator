@@ -3,6 +3,7 @@ const digitBtns = document.querySelectorAll(".digit-btn");
 const operatorBtns = document.querySelectorAll(".operator-btn");
 const equalBtn = document.querySelectorAll(".equal-btn")[0];
 const clearBtn = document.querySelectorAll(".clear-btn")[0];
+const dotBtn = document.querySelectorAll(".dot-btn")[0];
 
 let operation = [];
 const divisionByZeroErrorMsg = "Get better sleep.";
@@ -114,4 +115,29 @@ equalBtn.addEventListener("click", () => {
 clearBtn.addEventListener("click", () => {
   operation = [];
   clearDisplay();
+});
+
+dotBtn.addEventListener("click", () => {
+  if (equalPressed) {
+    clearDisplay();
+    equalPressed = false;
+    operation = [];
+  }
+
+  if (operation.length === 0) {
+    operation.push("0.");
+    populateDisplay("0.");
+  } else if (operation.length === 1) {
+    if (operation[0].includes(".")) return;
+    operation[0] += ".";
+    populateDisplay(".");
+  } else if (operation.length === 2) {
+    clearDisplay();
+    operation.push("0.");
+    populateDisplay("0.");
+  } else if (operation.length === 3) {
+    if (operation[2].includes(".")) return;
+    operation[2] += ".";
+    populateDisplay(".");
+  }
 });

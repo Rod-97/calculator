@@ -46,6 +46,17 @@ function clearDisplay() {
   display.textContent = "0";
 }
 
+function displayResult(operation) {
+  if (operation[1] === "/" && operation[2] === "0") {
+    populateDisplay(divisionByZeroErrorMsg);
+    return divisionByZeroErrorMsg;
+  }
+  const result = String(operate(...operation));
+  clearDisplay();
+  populateDisplay(result);
+  return result;
+}
+
 digitBtns.forEach((digitBtn) => {
   digitBtn.addEventListener("click", () => {
     const digit = digitBtn.textContent;
@@ -75,28 +86,16 @@ operatorBtns.forEach((operatorBtn) => {
     } else if (operation.length === 2) {
       operation[1] = operator;
     } else if (operation.length === 3) {
-      if (operation[1] === "/" && operation[2] === "0") {
-        populateDisplay(divisionByZeroErrorMsg);
-        operation = [];
-        return;
-      }
-      const result = String(operate(...operation));
-      operation = [result, operator];
-      clearDisplay();
-      populateDisplay(result);
+      const result = displayResult(operation);
+      if (result === divisionByZeroErrorMsg) operation = [];
+      else operation = [result, operator];
     }
   });
 });
 
 equalBtn.addEventListener("click", () => {
   if (operation.length !== 3) return;
-  if (operation[1] === "/" && operation[2] === "0") {
-    populateDisplay(divisionByZeroErrorMsg);
-    operation = [];
-    return;
-  }
-  const result = String(operate(...operation));
-  operation = [result];
-  clearDisplay();
-  populateDisplay(result);
+  const result = displayResult(operation);
+  if (result === divisionByZeroErrorMsg) operation = [];
+  else operation = [result];
 });

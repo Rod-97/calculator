@@ -4,6 +4,7 @@ const operatorBtns = document.querySelectorAll(".operator-btn");
 const equalBtn = document.querySelectorAll(".equal-btn")[0];
 const clearBtn = document.querySelectorAll(".clear-btn")[0];
 const dotBtn = document.querySelectorAll(".dot-btn")[0];
+const backBtn = document.querySelectorAll(".back-btn")[0];
 
 let operation = [];
 const divisionByZeroErrorMsg = "Get better sleep.";
@@ -45,6 +46,11 @@ function populateDisplay(newNum) {
   } else {
     display.textContent += newNum;
   }
+}
+
+function depopulateDisplay() {
+  display.textContent = display.textContent.slice(0, -1);
+  if (display.textContent === "") display.textContent = "0";
 }
 
 function clearDisplay() {
@@ -139,5 +145,16 @@ dotBtn.addEventListener("click", () => {
     if (operation[2].includes(".")) return;
     operation[2] += ".";
     populateDisplay(".");
+  }
+});
+
+backBtn.addEventListener("click", () => {
+  if (operation.length === 0 || operation.length === 2) return;
+  if (operation.length === 1) {
+    operation[0] = operation[0].slice(0, -1);
+    depopulateDisplay();
+  } else if (operation.length === 3) {
+    operation[2] = operation[2].slice(0, -1);
+    depopulateDisplay();
   }
 });

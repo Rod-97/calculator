@@ -24,12 +24,14 @@ function divide(num1, num2) {
 }
 
 function operate(num1, operator, num2) {
+  let result = 0;
   num1 = Number(num1);
   num2 = Number(num2);
-  if (operator === "+") return add(num1, num2);
-  if (operator === "-") return subtract(num1, num2);
-  if (operator === "x") return multiply(num1, num2);
-  if (operator === "/") return divide(num1, num2);
+  if (operator === "+") result = add(num1, num2);
+  if (operator === "-") result = subtract(num1, num2);
+  if (operator === "x") result = multiply(num1, num2);
+  if (operator === "/") result = divide(num1, num2);
+  return +result.toFixed(10);
 }
 
 function populateDisplay(newNum) {

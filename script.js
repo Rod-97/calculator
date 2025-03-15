@@ -1,3 +1,6 @@
+const display = document.querySelector("#display-num");
+const digitBtns = document.querySelectorAll(".digit-btn");
+
 function add(num1, num2) {
   return num1 + num2;
 }
@@ -22,3 +25,15 @@ function operate(num1, operator, num2) {
   if (operator === "x") return multiply(num1, num2);
   if (operator === "/") return divide(num1, num2);
 }
+
+function populateDisplay(newNum) {
+  if (display.textContent === "0") display.textContent = newNum;
+  else display.textContent += newNum;
+}
+
+digitBtns.forEach((digitBtn) => {
+  digitBtn.addEventListener("click", () => {
+    const digit = digitBtn.textContent;
+    populateDisplay(digit);
+  });
+});

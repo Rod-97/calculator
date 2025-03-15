@@ -38,6 +38,7 @@ function reset() {
 
 const display = document.querySelector("#display-num");
 const digitBtns = document.querySelectorAll(".digit-btn");
+const dotBtn = document.querySelectorAll(".dot-btn")[0];
 const operatorBtns = document.querySelectorAll(".operator-btn");
 const equalBtn = document.querySelectorAll(".equal-btn")[0];
 const clearBtn = document.querySelectorAll(".clear-btn")[0];
@@ -103,4 +104,9 @@ equalBtn.addEventListener("click", () => {
 clearBtn.addEventListener("click", () => {
   reset();
   clearDisplay();
+});
+
+dotBtn.addEventListener("click", () => {
+  if (display.textContent.includes(".")) return;
+  display.textContent += ".";
 });

@@ -4,6 +4,7 @@ const operatorBtns = document.querySelectorAll(".operator-btn");
 const equalBtn = document.querySelectorAll(".equal-btn")[0];
 
 let operation = [];
+const divisionByZeroErrorMsg = "Get better sleep.";
 
 function add(num1, num2) {
   return num1 + num2;
@@ -31,17 +32,18 @@ function operate(num1, operator, num2) {
 }
 
 function populateDisplay(newNum) {
-  if (display.textContent === "0") display.textContent = newNum;
-  else display.textContent += newNum;
+  if (
+    display.textContent === "0" ||
+    display.textContent === divisionByZeroErrorMsg
+  ) {
+    display.textContent = newNum;
+  } else {
+    display.textContent += newNum;
+  }
 }
 
 function clearDisplay() {
   display.textContent = "0";
-}
-
-function displayResult(result) {
-  clearDisplay();
-  populateDisplay(result);
 }
 
 digitBtns.forEach((digitBtn) => {
@@ -73,16 +75,28 @@ operatorBtns.forEach((operatorBtn) => {
     } else if (operation.length === 2) {
       operation[1] = operator;
     } else if (operation.length === 3) {
-      const result = operate(...operation);
+      if (operation[1] === "/" && operation[2] === "0") {
+        populateDisplay(divisionByZeroErrorMsg);
+        operation = [];
+        return;
+      }
+      const result = String(operate(...operation));
       operation = [result, operator];
-      displayResult(result);
+      clearDisplay();
+      populateDisplay(result);
     }
   });
 });
 
 equalBtn.addEventListener("click", () => {
   if (operation.length !== 3) return;
-  const result = operate(...operation);
+  if (operation[1] === "/" && operation[2] === "0") {
+    populateDisplay(divisionByZeroErrorMsg);
+    operation = [];
+    return;
+  }
+  const result = String(operate(...operation));
   operation = [result];
-  displayResult(result);
+  clearDisplay();
+  populateDisplay(result);
 });

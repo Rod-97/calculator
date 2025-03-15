@@ -72,7 +72,7 @@ digitBtns.forEach((digitBtn) => {
   digitBtn.addEventListener("click", () => {
     const digit = digitBtn.textContent;
 
-    if (equalPressed) {
+    if (equalPressed && operation.length < 2) {
       clearDisplay();
       equalPressed = false;
       operation = [];

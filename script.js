@@ -2,6 +2,7 @@ const display = document.querySelector("#display-num");
 const digitBtns = document.querySelectorAll(".digit-btn");
 const operatorBtns = document.querySelectorAll(".operator-btn");
 const equalBtn = document.querySelectorAll(".equal-btn")[0];
+const clearBtn = document.querySelectorAll(".clear-btn")[0];
 
 let operation = [];
 const divisionByZeroErrorMsg = "Get better sleep.";
@@ -98,4 +99,9 @@ equalBtn.addEventListener("click", () => {
   const result = displayResult(operation);
   if (result === divisionByZeroErrorMsg) operation = [];
   else operation = [result];
+});
+
+clearBtn.addEventListener("click", () => {
+  operation = [];
+  clearDisplay();
 });

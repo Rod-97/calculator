@@ -63,7 +63,7 @@ digitBtns.forEach((digitBtn) => {
   digitBtn.addEventListener("click", () => {
     if (
       (operator !== null && display.textContent === num1) ||
-      display.textContent === result ||
+      display.textContent === String(result) ||
       display.textContent === divisionByZeroErrorMsg
     ) {
       clearDisplay();

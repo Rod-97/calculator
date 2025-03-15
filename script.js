@@ -6,6 +6,7 @@ const clearBtn = document.querySelectorAll(".clear-btn")[0];
 
 let operation = [];
 const divisionByZeroErrorMsg = "Get better sleep.";
+let equalPressed = false;
 
 function add(num1, num2) {
   return num1 + num2;
@@ -64,6 +65,12 @@ digitBtns.forEach((digitBtn) => {
   digitBtn.addEventListener("click", () => {
     const digit = digitBtn.textContent;
 
+    if (equalPressed) {
+      clearDisplay();
+      equalPressed = false;
+      operation = [];
+    }
+
     if (operation.length === 0) {
       operation.push(digit);
     } else if (operation.length === 1) {
@@ -99,6 +106,7 @@ operatorBtns.forEach((operatorBtn) => {
 equalBtn.addEventListener("click", () => {
   if (operation.length !== 3) return;
   const result = displayResult(operation);
+  equalPressed = true;
   if (result === divisionByZeroErrorMsg) operation = [];
   else operation = [result];
 });
